@@ -7,7 +7,6 @@
   <groupId>com.mycompany.app</groupId>
   <artifactId>my-app</artifactId>
   <version>1.0.0</version>
-  <packaging>war</packaging>
 
   <name>my-app</name>
   <!-- FIXME change it to the project's website -->
