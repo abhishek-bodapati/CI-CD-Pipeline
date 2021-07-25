@@ -1,9 +1,11 @@
 pipeline {
     agent any
-    options([pipelineTriggers([githubPush()])])
     tools {
         maven 'Maven'
     }
+    triggers {
+        githubPush()
+    } 
     stages {
         stage('Build') {
             steps {
