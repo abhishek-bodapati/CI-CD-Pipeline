@@ -15,7 +15,7 @@ pipeline {
                     [
                         artifactId: 'my-app', 
                         classifier: '', 
-                        file: 'target/my-app-1.0.0.jar', 
+                        file: 'target/my-app-1.1.0.jar', 
                         type: 'jar'
                     ]
                 ], 
@@ -25,7 +25,7 @@ pipeline {
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'my-app-release', 
-                version: '1.0.0'
+                version: '1.1.0'
             }
         }
     }
