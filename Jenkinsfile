@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    properties([pipelineTriggers([githubPush()])])
     tools {
         maven 'Maven'
     }
