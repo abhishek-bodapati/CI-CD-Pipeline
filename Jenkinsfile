@@ -37,9 +37,7 @@ pipeline {
 			script{
                 emailext subject: "Automation Result: Job '${env.JOB_NAME} - ${env.BUILD_NUMBER}'", 
                 body:'''  
-                      total:${TEST_COUNTS,var="total"},
-                      pass:${TEST_COUNTS,var="pass"},
-                      fail:${TEST_COUNTS,var="fail"}
+                      ${env.JENKINS_URL}
                    ''',
                 to:'$DEFAULT_RECIPIENTS'
             }
