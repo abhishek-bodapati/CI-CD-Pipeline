@@ -36,9 +36,7 @@ pipeline {
 		always {
 			script{
                 emailext subject: "Automation Result: Job '${env.JOB_NAME} - ${env.BUILD_NUMBER}'", 
-                body:'''  
-                      ${env.JENKINS_URL}
-                   ''',
+                body: "${env.BUILD_URL} has result ${currentBuild.result}",
                 to:'$DEFAULT_RECIPIENTS'
             }
         }
