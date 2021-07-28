@@ -15,7 +15,7 @@ pipeline {
         stage('Upload JAR to Nexus') {
             steps {
                 script {
-                    def mavenPom = readMavenPom 'pom.xml' // Used to get data from pom.xml
+                    def mavenPom = readMavenPom file: 'pom.xml' // Used to get data from pom.xml
                     nexusArtifactUploader artifacts: [
                         [
                             artifactId: 'my-app', 
