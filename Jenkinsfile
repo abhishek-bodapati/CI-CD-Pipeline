@@ -40,7 +40,7 @@ pipeline {
             script {
                 def jobdetails = "${env.JOB_NAME}-${env.BUILD_NUMBER}"
                 def jobstatus = "${currentBuild.result}"
-                def myJson = "{'${jobdetails}':'${jobstatus}'}";
+                def myJson = "{"'${jobdetails}'":"'${jobstatus}'"}";
                 echo "${myJson}"
                 if("${currentBuild.result}" == "SUCCESS") {
                     sh "curl -v -H 'Content-Type: application/json' -X POST -d '${myJson}' http://localhost:1080"
