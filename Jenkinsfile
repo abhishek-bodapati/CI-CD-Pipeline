@@ -43,7 +43,8 @@ pipeline {
 				to:'$DEFAULT_RECIPIENTS'
 			}
             if("${currentBuild.result}" == "SUCCESS") {
-                sh 'curl -v -H "Content-Type: application/json" -X POST -d '{"BuildStatus":"${currentBuild.result}"}' http://localhost:1080'
+                sh "curl -v -H 'Content-Type: application/json' -X POST -d '{'hero':'yes'}' http://localhost:1080"
+                //sh 'curl -v -H "Content-Type: application/json" -X POST -d '{"Build Status":"${currentBuild.result}"}' http://localhost:1080'
             }
 		}
     }
