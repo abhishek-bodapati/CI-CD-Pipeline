@@ -39,9 +39,9 @@ pipeline {
 	    always {
             script {
                 def jobdetails = "${env.JOB_NAME}-${env.BUILD_NUMBER}"
-                echo "${jobdetails}"
+                def jobstatus = "${currentBuild.result}"
                 if("${currentBuild.result}" == "SUCCESS") {
-                    sh "curl -v -H 'Content-Type: application/json' -X POST -d '{'${env.JOB_NAME}-${env.BUILD_NUMBER}' : '${currentBuild.result}'}' http://localhost:1080"
+                    sh "curl -v -H 'Content-Type: application/json' -X POST -d '{"${jobdetails}" : "${jobstatus}"}' http://localhost:1080"
                 }
                 else {
                     echo 'Build failed/aborted'
