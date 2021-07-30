@@ -38,6 +38,7 @@ pipeline {
     post('Generate report') { 
 	    always {
             script {
+                def mavenPom = readMavenPom file: 'pom.xml'
                 def jobdetails = "${env.JOB_NAME}-${env.BUILD_NUMBER}"
                 def jobstatus = "${currentBuild.result}"
                 def myJson = "{\"Job details\": \"${jobdetails}\", \"Build status\": \"${jobstatus}\", \"Version\": \"${mavenPom.version}\"}";
