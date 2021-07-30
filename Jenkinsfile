@@ -48,21 +48,23 @@ pipeline {
         }
     }
     post('Generate report') { 
-	always {
-        steps {
-            echo "${currentBuild.result}"
-            if("${currentBuild.result}" == "SUCCESS") {
-                echo "if"
+	    always {
+            steps {
+                script {
+                    echo "${currentBuild.result}"
+                    if("${currentBuild.result}" == "SUCCESS") {
+                        echo "if"
+                    }
+                    else {
+                        echo 'else'
+                    }
+                }
             }
-            else {
-                echo 'else'
-            }
-        }
-			script{
+			/*script{
 				emailext subject: "Automation Result: Job '${env.JOB_NAME} - ${env.BUILD_NUMBER}'", 
 				body: "${env.BUILD_URL} has result ${currentBuild.result}",
 				to:'$DEFAULT_RECIPIENTS'
-			}
+			}*/
 		}
     }
 }
