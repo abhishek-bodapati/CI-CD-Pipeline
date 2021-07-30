@@ -38,19 +38,21 @@ pipeline {
     post('Generate report') { 
 	    always {
             script {
+                // Sends HTTP POST request in JSON format
                 def mavenPom = readMavenPom file: 'pom.xml'
                 def jobdetails = "${env.JOB_NAME}-${env.BUILD_NUMBER}"
                 def jobstatus = "${currentBuild.result}"
                 def myJson = "{\"Job details\": \"${jobdetails}\", \"Build status\": \"${jobstatus}\", \"Version\": \"${mavenPom.version}\"}";
                 echo "${myJson}"
                 if("${currentBuild.result}" == "SUCCESS") {
-                    sh "curl -v -H 'Content-Type: application/json' -X POST -d '${myJson}' http://localhost:1080" 
+                    def destination_ip = "http://localhost:1080"
+                    sh "curl -v -H 'Content-Type: application/json' -X POST -d '${myJson}' ${destination_ip}" 
                 }
                 else {
                     echo 'Build failed/aborted'
                 }
-            }
-			script{
+
+                // Sends an email notification to the developer
 				emailext subject: "Automation Result: Job '${env.JOB_NAME} - ${env.BUILD_NUMBER}'", 
 				body: "${env.BUILD_URL} has result ${currentBuild.result}",
 				to:'$DEFAULT_RECIPIENTS'
