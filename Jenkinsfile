@@ -50,7 +50,7 @@ pipeline {
     post('Generate report') { 
 	always {
             echo "${currentBuild.result}"
-            if("${currentBuild.result} == 'SUCCESS'") {
+            if("${currentBuild.result}" == 'SUCCESS') {
                 echo "if"
             }
             else {
