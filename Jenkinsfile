@@ -38,7 +38,8 @@ pipeline {
     post('Generate report') { 
 	    always {
             script {
-                echo "${currentBuild.result}"
+                def jobdetails = "${env.JOB_NAME}-${env.BUILD_NUMBER}"
+                echo "${jobdetails}"
                 if("${currentBuild.result}" == "SUCCESS") {
                     sh "curl -v -H 'Content-Type: application/json' -X POST -d '{'${env.JOB_NAME}-${env.BUILD_NUMBER}' : '${currentBuild.result}'}' http://localhost:1080"
                 }
