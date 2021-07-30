@@ -44,7 +44,7 @@ pipeline {
                 echo "${myJson}"
                 if("${currentBuild.result}" == "SUCCESS") {
                     //sh "curl -v -H 'Content-Type: application/json' -X POST -d '${myJson}' http://localhost:1080"
-                    def response = httpRequest "http://localhost:1080/response-headers?status=${jobstatus}"
+                    def response = httpRequest "http://localhost:1080/request-headers?status=${jobstatus}"
                     println('Status: '+response.status)
                     println('Response: '+response.content)
                 }
