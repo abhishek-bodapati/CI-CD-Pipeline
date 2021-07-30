@@ -50,7 +50,12 @@ pipeline {
     post('Generate report') { 
 	always {
             echo "${currentBuild.result}"
-            echo "${currentBuild.result} == 'SUCCESS'"
+            if("${currentBuild.result} == 'SUCCESS'") {
+                echo "if"
+            }
+            else {
+                echo 'else'
+            }
 			script{
 				emailext subject: "Automation Result: Job '${env.JOB_NAME} - ${env.BUILD_NUMBER}'", 
 				body: "${env.BUILD_URL} has result ${currentBuild.result}",
