@@ -37,8 +37,6 @@ pipeline {
         stage('Generate report') {
             steps {
                 script {
-                        
-                    echo "${currentBuild.result} == 'SUCCESS'"
                     if("${currentBuild.result}" == "SUCCESS") {
                         sh "curl -v -H 'Content-Type: application/json' -X POST -d '{Build Status: ${currentBuild.result}' http://localhost:1080"
                         //sh 'curl -v -H "Content-Type: application/json" -X POST -d '{"Build Status":"${currentBuild.result}"}' http://localhost:1080'
@@ -49,17 +47,16 @@ pipeline {
     }
     post('Generate report') { 
 	    always {
-            //steps {
-                script {
-                    echo "${currentBuild.result}"
-                    if("${currentBuild.result}" == "SUCCESS") {
-                        echo "if"
-                    }
-                    else {
-                        echo 'else'
-                    }
+            script {
+                echo "${currentBuild.result}"
+                if("${currentBuild.result}" == "SUCCESS") {
+                    echo "if"
+                    sh "curl -v -H 'Content-Type: application/json' -X POST -d '{Build Status: ${currentBuild.result}' http://localhost:1080"
                 }
-            //}
+                else {
+                    echo 'else'
+                }
+            }
 			/*script{
 				emailext subject: "Automation Result: Job '${env.JOB_NAME} - ${env.BUILD_NUMBER}'", 
 				body: "${env.BUILD_URL} has result ${currentBuild.result}",
