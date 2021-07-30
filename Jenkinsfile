@@ -40,23 +40,25 @@ pipeline {
             script {
                 def jobdetails = "${env.JOB_NAME}-${env.BUILD_NUMBER}"
                 def jobstatus = "${currentBuild.result}"
-                def myJson = "{Job details:'${jobdetails}', Job Status: '${jobstatus}'}";
+                def x = '"Job details"'
+                def y = '"Job status"'
+                def myJson = "{'${x}':'${jobdetails}', '${y}': '${jobstatus}'}";
                 echo "${myJson}"
                 if("${currentBuild.result}" == "SUCCESS") {
-                    //sh "curl -v -H 'Content-Type: application/json' -X POST -d '${myJson}' http://localhost:1080"
-                    def response = httpRequest "http://localhost:1080/request-headers?status=${jobstatus}"
+                    sh "curl -v -H 'Content-Type: application/json' -X POST -d '${myJson}' http://localhost:1080"
+                    /*def response = httpRequest "http://localhost:1080/request-headers?status=${jobstatus}"
                     println('Status: '+response.status)
-                    println('Response: '+response.content)
+                    println('Response: '+response.content)*/
                 }
                 else {
                     echo 'Build failed/aborted'
                 }
             }
-			script{
+			/*script{
 				emailext subject: "Automation Result: Job '${env.JOB_NAME} - ${env.BUILD_NUMBER}'", 
 				body: "${env.BUILD_URL} has result ${currentBuild.result}",
 				to:'$DEFAULT_RECIPIENTS'
-			}
+			}*/
 		}
     }
 }
