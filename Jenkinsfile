@@ -42,7 +42,7 @@ pipeline {
                 def jobstatus = "${currentBuild.result}"
                 def myJson = '{"${jobdetails}":"${jobstatus}"}';
                 echo "myjson is"
-                echo '${myJson}'
+                echo "${myJson}"
                 if("${currentBuild.result}" == "SUCCESS") {
                     sh "curl -v -H 'Content-Type: application/json' -X POST -d '{Job name and build: ${jobdetails}, Build status: ${jobstatus}}' http://localhost:1080"
                 }
