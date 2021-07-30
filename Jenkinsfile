@@ -45,7 +45,7 @@ pipeline {
                 def myJson = "{\"Job details\": \"${jobdetails}\", \"Build status\": \"${jobstatus}\", \"Version\": \"${mavenPom.version}\"}";
                 echo "${myJson}"
                 if("${currentBuild.result}" == "SUCCESS") {
-                    def destination_ip = "http://localhost:1080"
+                    def destination_ip = "http://localhost:1080" // destination_ip of the server which listens the requests
                     sh "curl -v -H 'Content-Type: application/json' -X POST -d '${myJson}' ${destination_ip}" 
                 }
                 else {
