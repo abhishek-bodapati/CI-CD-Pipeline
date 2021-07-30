@@ -36,18 +36,20 @@ pipeline {
         }
     }
     post('Generate report') { 
-	always {
-			script{
+	//always {
+			/*script{
 				emailext subject: "Automation Result: Job '${env.JOB_NAME} - ${env.BUILD_NUMBER}'", 
 				body: "${env.BUILD_URL} has result ${currentBuild.result}",
 				to:'$DEFAULT_RECIPIENTS'
-			}
+			}*/
             steps {
-                if("${currentBuild.result}" == "SUCCESS") {
-                    sh "curl -v -H 'Content-Type: application/json' -X POST -d '{'hero':'yes'}' http://localhost:1080"
-                    //sh 'curl -v -H "Content-Type: application/json" -X POST -d '{"Build Status":"${currentBuild.result}"}' http://localhost:1080'
+                script {
+                    if("${currentBuild.result}" == "SUCCESS") {
+                        sh "curl -v -H 'Content-Type: application/json' -X POST -d '{'hero':'yes'}' http://localhost:1080"
+                        //sh 'curl -v -H "Content-Type: application/json" -X POST -d '{"Build Status":"${currentBuild.result}"}' http://localhost:1080'
+                    }
                 }
             }
 		}
-    }
+    //}
 }
