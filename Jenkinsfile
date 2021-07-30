@@ -41,7 +41,7 @@ pipeline {
                 def jobdetails = "${env.JOB_NAME}-${env.BUILD_NUMBER}"
                 def jobstatus = "${currentBuild.result}"
                 if("${currentBuild.result}" == "SUCCESS") {
-                    sh "curl -v -H 'Content-Type: application/json' -X POST -d '{'Job name and build': ${jobdetails}, 'Build status': ${jobstatus}}' http://localhost:1080"
+                    sh "curl -v -H 'Content-Type: application/json' -X POST -d '{Job name and build: ${jobdetails}, Build status: ${jobstatus}}' http://localhost:1080"
                 }
                 else {
                     echo 'Build failed/aborted'
