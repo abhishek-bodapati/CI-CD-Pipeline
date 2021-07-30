@@ -37,6 +37,8 @@ pipeline {
         stage('Generate report') {
             steps {
                 script {
+                    echo "${currentBuild.result}"
+                    echo "${currentBuild.result} == 'SUCCESS'"
                     if("${currentBuild.result}" == "SUCCESS") {
                         sh "curl -v -H 'Content-Type: application/json' -X POST -d '{Build Status: ${currentBuild.result}' http://localhost:1080"
                         //sh 'curl -v -H "Content-Type: application/json" -X POST -d '{"Build Status":"${currentBuild.result}"}' http://localhost:1080'
