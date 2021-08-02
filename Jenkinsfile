@@ -15,8 +15,9 @@ pipeline {
         stage('Upload JAR to Nexus') {
             steps {
                 script {
-                    def mavenPom = readMavenPom file: 'pom.xml' // Used to get data from pom.xml
-                    def props = readProperties file: 'src/main/resources/application.properties'
+                    //def mavenPom = readMavenPom file: 'pom.xml' // Used to get data from pom.xml
+                    //def props = readProperties file: 'src/main/resources/application.properties'
+                    def props = readProperties file: '~/.bash_profile'
                     env.VERSION = props.VERSION
                     nexusArtifactUploader artifacts: [
                         [
