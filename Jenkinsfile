@@ -16,11 +16,13 @@ pipeline {
             steps {
                 script {
                     def mavenPom = readMavenPom file: 'pom.xml' // Used to get data from pom.xml
+                    def props = readProperties file: 'src/main/resources/application.properties'
+                    env.VERSION = props.VERSION
                     nexusArtifactUploader artifacts: [
                         [
                             artifactId: 'my-app', 
                             classifier: '', 
-                            file: "target/my-app-${mavenPom.version}.jar", 
+                            file: "target/my-app-${VERSION}.jar", 
                             type: 'jar'
                         ]
                     ], 
@@ -30,7 +32,7 @@ pipeline {
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
                     repository: 'my-app-release', 
-                    version: "${mavenPom.version}"
+                    version: "${VERSION}"
                 }
             }
         }
