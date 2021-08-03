@@ -16,8 +16,8 @@ pipeline {
             steps {
                 script {
                     //def mavenPom = readMavenPom file: 'pom.xml' // Used to get data from pom.xml
-                    //def props = readProperties file: 'src/main/resources/application.properties'
-                    def props = readProperties file: '.env'
+                    def props = readProperties file: 'src/main/resources/application.properties'
+                    //def props = readProperties file: '.env'
                     env.VERSION = props.VERSION
                     echo "version is ${VERSION}"
                     nexusArtifactUploader artifacts: [
