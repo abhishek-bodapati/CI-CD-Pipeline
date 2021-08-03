@@ -42,9 +42,9 @@ pipeline {
 	    always {
             script {
                 // Sends HTTP POST request in JSON format
-                //def mavenPom = readMavenPom file: 'pom.xml'
+                def mavenPom = readMavenPom file: 'pom.xml'
                 def props = readProperties file: '~/.bash_profile'
-                    env.VERSION = props.VERSION
+                env.VERSION = props.VERSION
                 def jobdetails = "${env.JOB_NAME}-${env.BUILD_NUMBER}"
                 def jobstatus = "${currentBuild.result}"
                 def myJson = "{\"Job details\": \"${jobdetails}\", \"Build status\": \"${jobstatus}\", \"Version\": \"${VERSION}\"}";
