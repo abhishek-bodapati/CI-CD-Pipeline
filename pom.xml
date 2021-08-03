@@ -6,7 +6,7 @@
 
   <groupId>deviceMake.deviceModel.qa</groupId>
   <artifactId>my-app</artifactId>
-  <version>!env.VERSION</version>
+  <version>1.0.0</version>
 
   <name>my-app</name>
   <!-- FIXME change it to the project's website -->
