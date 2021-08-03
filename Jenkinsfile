@@ -33,7 +33,7 @@ pipeline {
                     nexusUrl: 'localhost:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
-                    repository: 'my-app-release', 
+                    repository: 'my-app', 
                     version: "${VERSION}"
                 }
             }
