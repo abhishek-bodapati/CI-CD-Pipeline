@@ -44,7 +44,7 @@ pipeline {
             script {
                 // Sends HTTP POST request in JSON format
                 //def mavenPom = readMavenPom file: 'pom.xml'
-                def props = readProperties file: '~/.bash_profile'
+                def props = readProperties file: '.env'
                 env.VERSION = props.VERSION
                 echo "version is ${VERSION}"
                 def jobdetails = "${env.JOB_NAME}-${env.BUILD_NUMBER}"
