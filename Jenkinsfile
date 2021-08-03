@@ -28,7 +28,7 @@ pipeline {
                         ]
                     ], 
                     credentialsId: '33b4f031-8bab-4f9f-976d-cf771b6035cb', 
-                    groupId: 'com.mycompany.app', 
+                    groupId: 'com.mycompany.dev', 
                     nexusUrl: 'localhost:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
