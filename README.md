@@ -1,4 +1,4 @@
-# Artifact Upload
+# CI/CD Pipeline
 
 * This is repo contains the Jenkins file to upload the artifact from target folder to nexus repository.
 * Jenkins builds the job on every new commit.
