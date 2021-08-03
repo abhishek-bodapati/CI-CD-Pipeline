@@ -19,6 +19,7 @@ pipeline {
                     //def props = readProperties file: 'src/main/resources/application.properties'
                     def props = readProperties file: '~/.bash_profile'
                     env.VERSION = props.VERSION
+                    echo "version is ${VERSION}"
                     nexusArtifactUploader artifacts: [
                         [
                             artifactId: 'my-app', 
