@@ -42,10 +42,12 @@ pipeline {
 	    always {
             script {
                 // Sends HTTP POST request in JSON format
-                def mavenPom = readMavenPom file: 'pom.xml'
+                //def mavenPom = readMavenPom file: 'pom.xml'
+                def props = readProperties file: '~/.bash_profile'
+                    env.VERSION = props.VERSION
                 def jobdetails = "${env.JOB_NAME}-${env.BUILD_NUMBER}"
                 def jobstatus = "${currentBuild.result}"
-                def myJson = "{\"Job details\": \"${jobdetails}\", \"Build status\": \"${jobstatus}\", \"Version\": \"${mavenPom.version}\"}";
+                def myJson = "{\"Job details\": \"${jobdetails}\", \"Build status\": \"${jobstatus}\", \"Version\": \"${VERSION}\"}";
                 echo "${myJson}"
                 if("${currentBuild.result}" == "SUCCESS") {
                     def destination_ip = "http://localhost:1080" // destination_ip of the server which listens the requests
