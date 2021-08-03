@@ -17,8 +17,9 @@ pipeline {
                 script {
                     //def mavenPom = readMavenPom file: 'pom.xml' // Used to get data from pom.xml
                     //def props = readProperties file: 'src/main/resources/application.properties'
-                    def props = readProperties file: '~/.bash_profile'
+                    def props = readProperties file: 'env'
                     env.VERSION = props.VERSION
+                    echo "version is ${VERSION}"
                     nexusArtifactUploader artifacts: [
                         [
                             artifactId: 'my-app', 
@@ -28,7 +29,7 @@ pipeline {
                         ]
                     ], 
                     credentialsId: '33b4f031-8bab-4f9f-976d-cf771b6035cb', 
-                    groupId: 'com.mycompany.app', 
+                    groupId: 'deviceMake.deviceModel.Prod', 
                     nexusUrl: 'localhost:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
@@ -42,10 +43,13 @@ pipeline {
 	    always {
             script {
                 // Sends HTTP POST request in JSON format
-                def mavenPom = readMavenPom file: 'pom.xml'
+                //def mavenPom = readMavenPom file: 'pom.xml'
+                def props = readProperties file: 'env'
+                env.VERSION = props.VERSION
+                echo "version is ${VERSION}"
                 def jobdetails = "${env.JOB_NAME}-${env.BUILD_NUMBER}"
                 def jobstatus = "${currentBuild.result}"
-                def myJson = "{\"Job details\": \"${jobdetails}\", \"Build status\": \"${jobstatus}\", \"Version\": \"${mavenPom.version}\"}";
+                def myJson = "{\"Job details\": \"${jobdetails}\", \"Build status\": \"${jobstatus}\", \"Version\": \"${VERSION}\"}";
                 echo "${myJson}"
                 if("${currentBuild.result}" == "SUCCESS") {
                     def destination_ip = "http://localhost:1080" // destination_ip of the server which listens the requests
