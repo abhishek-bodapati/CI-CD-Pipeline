@@ -35,5 +35,3 @@
 
 - Either use webhooks or add our pipeline script to the build pipeline yml
 
-
-PS: wantedly making changes!!!!
