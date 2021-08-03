@@ -29,7 +29,7 @@ pipeline {
                         ]
                     ], 
                     credentialsId: '33b4f031-8bab-4f9f-976d-cf771b6035cb', 
-                    groupId: 'deviceMake.deviceModel.QA', 
+                    groupId: 'deviceMake.deviceModel.Dev', 
                     nexusUrl: 'localhost:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
