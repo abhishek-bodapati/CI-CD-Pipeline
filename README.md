@@ -8,7 +8,7 @@
 ## Progress
 - [X] **Use Case 1**
 - [X] **Use Case 2**
-- [ ] **Use Case 3**
+- [X] **Use Case 3** (Partially done, Can be completed after Use Case 5)
 - [X] **Use Case 4** (Partially done)
 - [ ] **Use Case 5**
 
