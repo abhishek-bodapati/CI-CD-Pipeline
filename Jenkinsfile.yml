@@ -45,7 +45,7 @@ pipeline {
                 def props = readProperties file: 'env'
                 //def mavenPom = readMavenPom file: 'pom.xml'
                 env.VERSION = props.VERSION
-                echo "Version is ${VERSION}"
+                //echo "Version is ${VERSION}"
                 def jobdetails = "${JOB_NAME}-${env.BUILD_NUMBER}"
                 def jobstatus = "${currentBuild.result}"
                 def myJson = "{\"Job details\": \"${jobdetails}\", \"Build status\": \"${jobstatus}\", \"Version\": \"${VERSION}\"}";
