@@ -16,10 +16,9 @@ pipeline {
             steps {
                 script {
                     //def mavenPom = readMavenPom file: 'pom.xml' // Used to get data from pom.xml
-                    //def props = readProperties file: 'src/main/resources/application.properties'
                     def props = readProperties file: 'env'
                     env.VERSION = props.VERSION
-                    echo "version is ${VERSION}"
+                    echo "Version is ${VERSION}"
                     nexusArtifactUploader artifacts: [
                         [
                             artifactId: 'my-app', 
@@ -43,11 +42,11 @@ pipeline {
 	    always {
             script {
                 // Sends HTTP POST request in JSON format
-                //def mavenPom = readMavenPom file: 'pom.xml'
                 def props = readProperties file: 'env'
+                //def mavenPom = readMavenPom file: 'pom.xml'
                 env.VERSION = props.VERSION
-                echo "version is ${VERSION}"
-                def jobdetails = "${env.JOB_NAME}-${env.BUILD_NUMBER}"
+                echo "Version is ${VERSION}"
+                def jobdetails = "${JOB_NAME}-${env.BUILD_NUMBER}"
                 def jobstatus = "${currentBuild.result}"
                 def myJson = "{\"Job details\": \"${jobdetails}\", \"Build status\": \"${jobstatus}\", \"Version\": \"${VERSION}\"}";
                 echo "${myJson}"
