@@ -25,7 +25,7 @@ pipeline {
                         artifactId: 'react-app', 
                         classifier: '', 
                         file: 'build/', 
-                        type: 'npm'
+                        type: ''
                     ]], 
                     credentialsId: '33b4f031-8bab-4f9f-976d-cf771b6035cb', 
                     groupId: 'Web-app.react-app', 
