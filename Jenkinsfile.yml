@@ -1,7 +1,7 @@
 pipeline {
-    agent any
+   r agent any
     tools {
-        nodejs "node"
+        nodejs "NodeJS"
     }
     triggers {
         githubPush()
