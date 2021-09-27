@@ -1,1 +1,2 @@
-VERSION=1.0.0
+VERSION=4.0.0
+SERVER=http://localhost:1080
