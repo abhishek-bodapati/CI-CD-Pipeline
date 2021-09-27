@@ -1,2 +1,2 @@
-VERSION=4.0.0
-SERVER=http://localhost:1080
+VERSION=2.0.0
+DESTINATION_SERVER=http://localhost:1080

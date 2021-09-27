@@ -9,8 +9,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
-                sh 'npm run build'
+                sh 'npm install && npm run build'
             }
         }
         stage('Compress/Zip') {
@@ -49,11 +48,8 @@ pipeline {
             script {
                 // Sends HTTP POST request in JSON format
                 def props = readProperties file: 'env'
-    
-                //def mavenPom = readMavenPom file: 'pom.xml'
                 env.VERSION = props.VERSION
-                env.IP_ADDRESS = props.SERVER
-                //echo "Version is ${VERSION}"
+                env.IP_ADDRESS = props.DESTINATION_SERVER
                 def jobdetails = "${JOB_NAME}-${env.BUILD_NUMBER}"
                 def jobstatus = "${currentBuild.result}"
                 def myJson = "{\"Job details\": \"${jobdetails}\", \"Build status\": \"${jobstatus}\", \"Version\": \"${VERSION}\"}";
@@ -65,12 +61,6 @@ pipeline {
                 else {
                     echo 'Build failed/aborted'
                 }
-                /*
-                // Sends an email notification to the developer
-				emailext subject: "Automation Result: Job '${env.JOB_NAME} - ${env.BUILD_NUMBER}'", 
-				body: "${env.BUILD_URL} has result ${currentBuild.result}",
-				to:'$DEFAULT_RECIPIENTS'
-                */
 			}
 		}
     }
