@@ -13,27 +13,33 @@ pipeline {
                 sh 'npm run build'
             }
         }
-        stage('Upload build folder to Nexus') {
+        stage('Compress/Zip') {
             steps {
                 script {
-                    //def mavenPom = readMavenPom file: 'pom.xml' // Used to get data from pom.xml
+                    zip dir: 'build', exclude: '', glob: '', zipFile: 'build.zip', overwrite: true
+                }
+            }
+        }
+        stage('Upload ZIP to Nexus') {
+            steps {
+                script {
                     def props = readProperties file: 'env'
                     env.VERSION = props.VERSION
                     echo "Version is ${VERSION}"
                     nexusArtifactUploader artifacts: [
                     [
-                        artifactId: 'react-app', 
+                        artifactId: 'sample-react-project', 
                         classifier: '', 
-                        file: 'build/favicon.ico', 
-                        type: 'ico'
+                        file: 'build.zip', 
+                        type: 'zip'
                     ]], 
                     credentialsId: '33b4f031-8bab-4f9f-976d-cf771b6035cb', 
-                    groupId: 'Web-app.react-app', 
+                    groupId: 'web-app.react-app', 
                     nexusUrl: 'localhost:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
-                    repository: 'react-app', 
-                    version: '1.0.0'
+                    repository: 'react-repo', 
+                    version: "${VERSION}"
                 }
             }
         }
@@ -56,8 +62,7 @@ pipeline {
                 }
                 else {
                     echo 'Build failed/aborted'
-                }*/
-                /*
+                }
                 // Sends an email notification to the developer
 				emailext subject: "Automation Result: Job '${env.JOB_NAME} - ${env.BUILD_NUMBER}'", 
 				body: "${env.BUILD_URL} has result ${currentBuild.result}",
